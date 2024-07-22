@@ -6,6 +6,8 @@ import { ENV_VARS } from './constants/index.js';
 import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware.js';
 import { notFoundMiddleware } from './middlewares/notFoundMiddleware.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
+import mongoose from 'mongoose';
+
 
 export const setupServer = () => {
   const app = express();
@@ -21,19 +23,27 @@ export const setupServer = () => {
   app.use(cors());
 
   app.get('/contacts', async (req, res) => {
-    const students = await getAllContacts();
+    const contacts = await getAllContacts();
     res.json({
       status: 200,
       message: 'Successfully found contacts!',
-      data: students,
+      data: contacts,
     });
   });
 
   app.get('/contacts/:contactId', async (req, res) => {
-    const id = req.params.contactId;
-    const student = await getContactById(id);
+      const id = req.params.contactId;
 
-    if (!student) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        status: 400,
+        message: `Invalid contact ID: ${id}`,
+      });
+      }
+
+    const contact = await getContactById(id);
+
+    if (!contact) {
       return res.status(404).json({
         status: 404,
         message: `Contact with id ${id} not found!`,
@@ -43,7 +53,7 @@ export const setupServer = () => {
     res.json({
       status: 200,
       message: `Successfully get contact with id ${id}!`,
-      data: student,
+      data: contact,
     });
   });
 
