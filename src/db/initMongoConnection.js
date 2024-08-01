@@ -18,4 +18,3 @@ export const initMongoConnection = async () => {
     throw err;
   }
 };
-
