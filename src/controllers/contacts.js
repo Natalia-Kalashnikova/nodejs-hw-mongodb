@@ -5,7 +5,8 @@ import {
     deleteContactById,
     upsertContact
 } from '../services/contacts.js';
-import mongoose from 'mongoose';
+import createHttpError from 'http-errors';
+ import mongoose from 'mongoose';
 
 
 export const getContactsController = async (req, res) => {
@@ -55,9 +56,11 @@ export const createContactController = async (req, res) => {
 };
 
 export const patchContactController = async (req, res) => {
-    const { body } = req;
-    const {contactId} = req.params;
-    const contact = await upsertContact(contactId, body);
+    const id = req.params.contactId;
+    const contact = await upsertContact(id, req.body);
+    if (!contact) {
+        throw createHttpError(404, 'Contact not found');
+    }
 
     res.status(200).json({
         status: 200,
@@ -68,6 +71,10 @@ export const patchContactController = async (req, res) => {
 
 export const deleteContactByIdController = async (req, res) => {
     const id = req.params.contactId;
-    await deleteContactById(id);
+    const contact = await deleteContactById(id);
+    if (!contact) {
+        throw createHttpError(404, 'Contact not found');
+    }
+
     res.status(204).send();
 };
