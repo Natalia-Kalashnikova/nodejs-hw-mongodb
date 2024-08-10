@@ -7,19 +7,22 @@ import {
     getContactsController,
     patchContactController,
 } from "../controllers/contacts.js";
-
+import { validateBody } from '../middlewares/validateBody.js';
+import { createContactSchema } from '../validation/createContactSchema.js';
+import { updateContactSchema } from '../validation/updateContactSchema.js';
+import { isValidId } from '../middlewares/isValidId';
 
 const contactsRouter = Router();
 
 contactsRouter.get('/contacts', ctrWrapper(getContactsController));
 
-contactsRouter.get('/contacts/:contactId', ctrWrapper(getContactByIdController));
+contactsRouter.get('/contacts/:contactId', isValidId, ctrWrapper(getContactByIdController));
 
-contactsRouter.post('/contacts', ctrWrapper(createContactController));
+contactsRouter.post('/contacts', validateBody(createContactSchema), ctrWrapper(createContactController));
 
-contactsRouter.patch('/contacts/:contactId', ctrWrapper(patchContactController));
+contactsRouter.patch('/contacts/:contactId', isValidId, validateBody(updateContactSchema), ctrWrapper(patchContactController));
 
-contactsRouter.delete('/contacts/:contactId', ctrWrapper(deleteContactByIdController));
+contactsRouter.delete('/contacts/:contactId', isValidId, ctrWrapper(deleteContactByIdController));
 
 
 export default contactsRouter;

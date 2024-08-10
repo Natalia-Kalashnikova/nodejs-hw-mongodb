@@ -6,7 +6,7 @@ import {
     upsertContact
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
- import mongoose from 'mongoose';
+//  import mongoose from 'mongoose';
 
 
 export const getContactsController = async (req, res) => {
@@ -21,12 +21,12 @@ export const getContactsController = async (req, res) => {
 export const getContactByIdController = async (req, res) => {
     const id = req.params.contactId;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({
-            status: 400,
-            message: `Invalid contact ID: ${id}`,
-        });
-    }
+    // if (!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(400).json({
+    //         status: 400,
+    //         message: `Invalid contact ID: ${id}`,
+    //     });
+    // }
 
     const contact = await getContactById(id);
 
