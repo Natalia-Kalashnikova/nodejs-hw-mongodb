@@ -8,18 +8,20 @@ import {
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
-
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 
 export const getContactsController = async (req, res) => {
     const { page, perPage } = parsePaginationParams(req.query);
-    const {sortBy, sortOrder} = parseSortParams(req.query);
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+    const filter = parseFilterParams(req.query);
 
     const contacts = await getAllContacts({
         page,
         perPage,
         sortBy,
         sortOrder,
+        filter,
     });
 
     res.json({
@@ -28,6 +30,7 @@ export const getContactsController = async (req, res) => {
         data: contacts,
     });
 };
+
 
 export const getContactByIdController = async (req, res) => {
     const id = req.params.contactId;
@@ -48,6 +51,7 @@ export const getContactByIdController = async (req, res) => {
     });
 };
 
+
 export const createContactController = async (req, res) => {
     const {body} = req;
     const contact = await createContact(body);
@@ -58,6 +62,7 @@ export const createContactController = async (req, res) => {
         data: contact,
     });
 };
+
 
 export const patchContactController = async (req, res) => {
     const id = req.params.contactId;
@@ -72,6 +77,7 @@ export const patchContactController = async (req, res) => {
         data: contact,
     });
 };
+
 
 export const deleteContactByIdController = async (req, res) => {
     const id = req.params.contactId;
