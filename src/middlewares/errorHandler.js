@@ -7,6 +7,7 @@ export const errorHandler = (error, req, res, next) => {
     return res.status(error.status).json({
     status: error.status,
     message: error.message,
+    errors: error.errors || [],
   });
   }
 
@@ -28,3 +29,4 @@ export const errorHandler = (error, req, res, next) => {
     }
   });
 };
+

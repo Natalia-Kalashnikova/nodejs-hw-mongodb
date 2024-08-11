@@ -6,11 +6,14 @@ import {
     upsertContact
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
-//  import mongoose from 'mongoose';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+
 
 
 export const getContactsController = async (req, res) => {
-    const contacts = await getAllContacts();
+    const { page, perPage } = parsePaginationParams(req.query);
+    const contacts = await getAllContacts({ page, perPage });
+
     res.json({
         status: 200,
         message: 'Successfully found contacts!',
@@ -20,13 +23,6 @@ export const getContactsController = async (req, res) => {
 
 export const getContactByIdController = async (req, res) => {
     const id = req.params.contactId;
-
-    // if (!mongoose.Types.ObjectId.isValid(id)) {
-    //     return res.status(400).json({
-    //         status: 400,
-    //         message: `Invalid contact ID: ${id}`,
-    //     });
-    // }
 
     const contact = await getContactById(id);
 
