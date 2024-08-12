@@ -6,11 +6,24 @@ import {
     upsertContact
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
- import mongoose from 'mongoose';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 
 export const getContactsController = async (req, res) => {
-    const contacts = await getAllContacts();
+    const { page, perPage } = parsePaginationParams(req.query);
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+    const filter = parseFilterParams(req.query);
+
+    const contacts = await getAllContacts({
+        page,
+        perPage,
+        sortBy,
+        sortOrder,
+        filter,
+    });
+
     res.json({
         status: 200,
         message: 'Successfully found contacts!',
@@ -18,15 +31,9 @@ export const getContactsController = async (req, res) => {
     });
 };
 
+
 export const getContactByIdController = async (req, res) => {
     const id = req.params.contactId;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({
-            status: 400,
-            message: `Invalid contact ID: ${id}`,
-        });
-    }
 
     const contact = await getContactById(id);
 
@@ -44,6 +51,7 @@ export const getContactByIdController = async (req, res) => {
     });
 };
 
+
 export const createContactController = async (req, res) => {
     const {body} = req;
     const contact = await createContact(body);
@@ -54,6 +62,7 @@ export const createContactController = async (req, res) => {
         data: contact,
     });
 };
+
 
 export const patchContactController = async (req, res) => {
     const id = req.params.contactId;
@@ -68,6 +77,7 @@ export const patchContactController = async (req, res) => {
         data: contact,
     });
 };
+
 
 export const deleteContactByIdController = async (req, res) => {
     const id = req.params.contactId;
