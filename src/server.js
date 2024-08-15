@@ -5,7 +5,7 @@ import { env } from './utils/env.js';
 import { ENV_VARS } from './constants/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import contactsRouter from './routers/contacts.js';
+import rootRouter from './routers/index.js';
 
 
 export const setupServer = () => {
@@ -23,7 +23,7 @@ export const setupServer = () => {
 
   app.use(express.json());
 
-  app.use(contactsRouter);
+  app.use(rootRouter);
 
   app.use(notFoundHandler);
 

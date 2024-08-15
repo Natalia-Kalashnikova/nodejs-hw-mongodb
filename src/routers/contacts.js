@@ -15,17 +15,17 @@ import { updateContactSchema } from "../validation/updateContactSchema.js";
 
 const contactsRouter = Router();
 
-contactsRouter.use('/contacts/:contactId', isValidId('contactId'));
+contactsRouter.use('/:contactId', isValidId('contactId'));
 
-contactsRouter.get('/contacts', ctrWrapper(getContactsController));
+contactsRouter.get('/', ctrWrapper(getContactsController));
 
-contactsRouter.get('/contacts/:contactId', ctrWrapper(getContactByIdController));
+contactsRouter.get('/:contactId', ctrWrapper(getContactByIdController));
 
-contactsRouter.post('/contacts', validateBody(createContactSchema), ctrWrapper(createContactController));
+contactsRouter.post('/', validateBody(createContactSchema), ctrWrapper(createContactController));
 
-contactsRouter.patch('/contacts/:contactId', validateBody(updateContactSchema), ctrWrapper(patchContactController));
+contactsRouter.patch('/:contactId', validateBody(updateContactSchema), ctrWrapper(patchContactController));
 
-contactsRouter.delete('/contacts/:contactId', ctrWrapper(deleteContactByIdController));
+contactsRouter.delete('/:contactId', ctrWrapper(deleteContactByIdController));
 
 
 export default contactsRouter;
