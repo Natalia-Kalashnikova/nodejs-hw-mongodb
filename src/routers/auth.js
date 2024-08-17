@@ -3,6 +3,7 @@ import { ctrWrapper } from "../utils/ctrlWrapper.js";
 import {
     loginUserController,
     logoutController,
+    refreshTokenController,
     registerUserController
 } from "../controllers/auth.js";
 import { registerUserSchema } from "../validation/registerUserSchema.js";
@@ -21,7 +22,10 @@ authRouter.post(
     validateBody(loginUserSchema),
     ctrWrapper(loginUserController),
 );
-// authRouter.post('/refresh-token');
+authRouter.post(
+    '/refresh-token',
+    ctrWrapper(refreshTokenController),
+);
 authRouter.post(
     '/logout',
     ctrWrapper(logoutController),
