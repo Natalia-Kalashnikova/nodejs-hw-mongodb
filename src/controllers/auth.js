@@ -33,7 +33,7 @@ export const loginUserController = async(req, res) => {
 
     setupSessionCookies(res, session);
 
-    res.json({
+    res.status(200).json({
         status: 200,
         message: 'Successfully logged in an user!',
         data: {accessToken: session.accessToken},
@@ -43,7 +43,7 @@ export const loginUserController = async(req, res) => {
 export const logoutController = async (req, res) => {
     await logoutUser({
         sessionId: req.cookies.sessionId,
-        sessionToken: req.cookies.sessionToken,
+        refreshToken: req.cookies.refreshToken,
     });
 
     res.clearCookie('sessionId');
@@ -53,7 +53,7 @@ export const logoutController = async (req, res) => {
 };
 
 export const refreshTokenController = async(req, res) => {
-    const { sessionId, refreshToken } = req.cookies;
+    const { sessionId, refreshToken  } = req.cookies;
     const session = await refreshSession({ sessionId, refreshToken });
 
     setupSessionCookies(res, session);
