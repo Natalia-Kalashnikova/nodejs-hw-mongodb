@@ -14,10 +14,10 @@ export const ENV_VARS = {
     JWT_SECRET: 'JWT_SECRET',
     FRONTEND_HOST: 'FRONTEND_HOST',
     APP_DOMAIN: 'APP_DOMAIN',
-    // CLOUDINARY_NAME: 'CLOUDINARY_NAME',
-    // CLOUDINARY_API_KEY: 'CLOUDINARY_API_KEY',
-    // CLOUDINARY_API_SECRET: 'CLOUDINARY_API_SECRET',
-    // IS_CLOUDINARY_ENABLED: 'IS_CLOUDINARY_ENABLED',
+    CLOUDINARY_NAME: 'CLOUDINARY_NAME',
+    CLOUDINARY_API_KEY: 'CLOUDINARY_API_KEY',
+    CLOUDINARY_API_SECRET: 'CLOUDINARY_API_SECRET',
+    IS_CLOUDINARY_ENABLED: 'IS_CLOUDINARY_ENABLED',
 };
 
 export const SORT_ORDER = {
@@ -30,8 +30,8 @@ export const REFRESH_TOKEN_TTL = 30 * 24 * 60 * 60 * 1000;
 
 export const TEMPLATE_DIR = path.join(process.cwd(), 'src', 'templates');
 
-// export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
-// export const UPLOAD_DIR = path.join(process.cwd(), 'upload');
+export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
+export const UPLOAD_DIR = path.join(process.cwd(), 'upload');
 
 
 
