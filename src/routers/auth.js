@@ -14,6 +14,7 @@ import { loginUserSchema } from "../validation/loginSchemaValidator.js";
 import { sendResetPasswordSchema } from "../validation/sendResetPasswordEmail.js";
 import { resetPasswordSchema } from "../validation/resetPasswordSchema.js";
 
+
 const authRouter = Router();
 
 authRouter.post(
@@ -21,15 +22,18 @@ authRouter.post(
     validateBody(registerUserSchema),
     ctrWrapper(registerUserController),
 );
+
 authRouter.post(
     '/login',
     validateBody(loginUserSchema),
     ctrWrapper(loginUserController),
 );
+
 authRouter.post(
     '/refresh',
     ctrWrapper(refreshTokenController),
 );
+
 authRouter.post(
     '/logout',
     ctrWrapper(logoutController),

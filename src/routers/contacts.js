@@ -27,19 +27,18 @@ contactsRouter.get('/:contactId', ctrWrapper(getContactByIdController));
 
 contactsRouter.post(
     '/',
-    upload.single('avatar'),
+    upload.single('photo'),
     validateBody(createContactSchema),
     ctrWrapper(createContactController)
 );
 
 contactsRouter.patch(
     '/:contactId',
-    upload.single('avatar'),
+    upload.single('photo'),
     validateBody(updateContactSchema),
     ctrWrapper(patchContactController)
 );
 
 contactsRouter.delete('/:contactId', ctrWrapper(deleteContactByIdController));
-
 
 export default contactsRouter;

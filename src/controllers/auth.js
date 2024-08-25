@@ -20,6 +20,7 @@ const setupSessionCookies = (res, session) => {
     });
 };
 
+
 export const registerUserController = async(req, res) => {
     const user = await createUser(req.body);
 
@@ -29,6 +30,7 @@ export const registerUserController = async(req, res) => {
         data: user
     });
 };
+
 
 export const loginUserController = async(req, res) => {
     const session = await loginUser(req.body);
@@ -41,6 +43,7 @@ export const loginUserController = async(req, res) => {
         data: {accessToken: session.accessToken},
     });
 };
+
 
 export const refreshTokenController = async(req, res) => {
     const { sessionId, refreshToken  } = req.cookies;
@@ -55,6 +58,7 @@ export const refreshTokenController = async(req, res) => {
     });
 };
 
+
 export const logoutController = async (req, res) => {
     await logoutUser({
         sessionId: req.cookies.sessionId,
@@ -67,6 +71,7 @@ export const logoutController = async (req, res) => {
     res.status(204).send();
 };
 
+
 export const sendResetPasswordEmailController = async (req, res) => {
     await sendResetPassword(req.body.email);
 
@@ -77,6 +82,7 @@ export const sendResetPasswordEmailController = async (req, res) => {
     });
   };
 
+  
   export const resetPasswordController = async (req, res) => {
     await resetPassword(req.body);
 

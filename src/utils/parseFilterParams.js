@@ -1,5 +1,6 @@
 const parseContactType = (contactType) => {
   const isString = typeof contactType === 'string';
+
   if (!isString) return;
   const isContactType = (contactType) =>
     ['work', 'home', 'personal'].includes(contactType);
@@ -11,8 +12,10 @@ const parseContactType = (contactType) => {
 const parseIsFavourite = (isFavourite) => {
   if (typeof isFavourite === 'string') {
     const isFavouriteValue = isFavourite.toLowerCase();
+
     if (isFavouriteValue === 'true') {
       return true;
+      
     } else if (isFavouriteValue === 'false') {
       return false;
     }
