@@ -16,7 +16,7 @@ servers:
   - url: http://localhost:3000
   - url: https://example.com/api/v1
     #посилання на задеплоєний сайт
-# paths:
+paths:
 #   # тут будуть посилання на ендпоінти
 #   /auth/register:
 #     post:
@@ -30,14 +30,14 @@ servers:
 #   /auth/refresh:
 #     post:
 #       $ref: ../swagger/paths/auth/refresh.yaml
-#   /contacts:
-#     get:
-#       $ref: ../swagger/paths/contacts/get.yaml
+  /contacts:
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
 #     post:
 #       $ref: ../swagger/paths/contacts/post.yaml
-#   /contacts/{id}:
-#     get:
-#       $ref: ../swagger/paths/contacts/{id}/get.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
 #     patch:
 #       $ref: ../swagger/paths/contacts/{id}/patch.yaml
 #     delete:
