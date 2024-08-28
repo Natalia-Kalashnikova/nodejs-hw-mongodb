@@ -1,4 +1,4 @@
-description: Not Found Error
+description: A user with this email address exists in the database
 content:
   application/json:
     schema:
@@ -10,7 +10,7 @@ content:
       properties:
         status:
           type: integer
-          example: 404
+          example: 409
         message:
           type: string
           example: NotFoundError
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Contact not found!'
+              example: 'Email in use'
