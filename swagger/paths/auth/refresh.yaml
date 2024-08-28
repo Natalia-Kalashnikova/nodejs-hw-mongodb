@@ -1,8 +1,8 @@
 tags:
   - Auth
-summary: Login a user
-operationId: loginUser
-description: 'Login user'
+summary: Refresh user session
+operationId: refreshUserSession
+description: 'Refresh user session and receive new access token'
 security:
   - bearerAuth: []
 requestBody:
@@ -11,18 +11,16 @@ requestBody:
       schema:
         type: object
         required:
-          - email
-          - password
+          - sessionId
+          - refreshToken
         properties:
-          email:
+          sessionId:
             type: string
-            example: borys@gmail.com
-          password:
+          refreshToken:
             type: string
-            example: '12345678'
 responses:
   '200':
-    description: 'Login a user'
+    description: 'Refresh user session'
     content:
       application/json:
         schema:
@@ -37,13 +35,14 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully logged in an user!
+              example: Successfully refreshed a session!
             data:
               type: object
-              $ref: ../../components/schemas/auth.yaml
-  '404':
-    $ref: ..\..\components\responses\auth\404.yaml
+              properties:
+                accessToken:
+                  type: string
+                  description: The new access token for the user session.
+                  example: usf51U7hPxehUy0z0NXnPJDf9o81FpU94dWuQ1jM
+
   '401':
     $ref: ..\..\components\responses\auth\401.yaml
-  '500':
-    $ref: ..\..\components\responses\auth\500.yaml

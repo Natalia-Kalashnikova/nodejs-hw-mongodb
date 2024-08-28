@@ -45,12 +45,10 @@ responses:
             data:
               type: object
               $ref: ../../components/schemas/auth.yaml
-  '404':
-    $ref: '../../components/responses/404.yaml'
-  '401':
-    $ref: '../../components/responses/401.yaml'
+  '400':
+    $ref: ..\..\components\responses\auth\400.yaml
   '409':
-    $ref: '../../components/responses/409.yaml'
+    $ref: ..\..\components\responses\auth\409.yaml
   '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: ..\..\components\responses\auth\500.yaml
 
