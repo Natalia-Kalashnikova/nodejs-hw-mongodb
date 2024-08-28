@@ -1,29 +1,30 @@
 tags:
   - Auth
-summary: Login a user
-operationId: loginUser
-description: Authenticates user and returns an access token
+summary: Reset password
+operationId: resetPassword
+description: 'Reset password'
 security:
   - bearerAuth: []
 requestBody:
-  required: true
   content:
     application/json:
       schema:
         type: object
         required:
-          - email
+          - token
           - password
         properties:
-          email:
+          token:
             type: string
-            example: borys@gmail.com
+            description: The token used for password reset.
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmNiMjkyMzEyNjA2NGJmNjIwYWIyNmQiLCJlbWFpbCI6Im5hdGFsaWFrYWxhc2huaWtvdmE3N0BnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTIyMTYsImV4cCI6MTcyNDU5MjUxNn0.agD5vhg_Wpl9cMXoQ0DxCbsNLYg0khXoM1s7jl2TrkM
           password:
             type: string
-            example: '12345678'
+            description: The new password for the user.
+            example: 12345
 responses:
   '200':
-    description: 'Login a user'
+    description: 'Password was successfully reset!'
     content:
       application/json:
         schema:
@@ -38,19 +39,12 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully logged in an user!
+              example: Password was successfully reset!
             data:
               type: object
-              $ref: ../../components/schemas/auth.yaml
-              required:
-                -accessToken
-              properties:
-                type: string
-                description: JWT access token
-                example: q3YhYWsde/XL7G06tfPw0NHACFDHXIU1rfDNUGnX
-  '404':
-    $ref: ..\..\components\responses\404.yaml
   '401':
     $ref: ..\..\components\responses\401.yaml
+  '404':
+    $ref: ..\..\components\responses\404.yaml
   '500':
     $ref: ..\..\components\responses\500.yaml

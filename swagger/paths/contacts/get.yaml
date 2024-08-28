@@ -13,6 +13,7 @@ parameters:
     example: 1
   - in: query
     name: perPage
+    description: limit contacts per page
     schema:
       type: integer
       example: 10
@@ -20,21 +21,25 @@ parameters:
     name: sortBy
     schema:
       type: string
+      enum: ['_id', 'name', 'phoneNumber', 'email']
       example: 'name'
     description: "All contact's fields can be mentioned. Default value - _id"
   - in: query
     name: sortOrder
+    description: Sort in ascending or descending order
     schema:
       type: string
       enum: ['asc', 'desc']
       example: 'asc'
   - in: query
     name: isFavourite
+    description: Sort by key isFavourite
     schema:
       type: boolean
       example: false
   - in: query
     name: contactType
+    description: Sort by key work, home, personal
     schema:
       type: string
       enum: ['work', 'home', 'personal']
@@ -91,6 +96,6 @@ responses:
                   type: boolean
                   example: false
   '401':
-    $ref: ..\..\components\responses\contacts\401.yaml
+    $ref: ..\..\components\responses\401.yaml
   '500':
-    $ref: ..\..\components\responses\contacts\500.yaml
+    $ref: ..\..\components\responses\500.yaml

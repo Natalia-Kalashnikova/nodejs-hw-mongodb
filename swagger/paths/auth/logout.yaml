@@ -2,7 +2,7 @@ tags:
   - Auth
 summary: Logout a user
 operationId: logoutUser
-description: 'Logout user'
+description: Logs out the currently authenticated user by clearing the session cookies.
 security:
   - bearerAuth: []
 requestBody:
@@ -12,7 +12,7 @@ requestBody:
         type: object
 responses:
   '204':
-    description: 'Logout a user'
+    description: Logout a user
     content:
       application/json:
         schema:
@@ -28,6 +28,6 @@ responses:
             data:
               type: object
   '401':
-    $ref: ..\..\components\responses\auth\401.yaml
+    $ref: ..\..\components\responses\401.yaml
   '500':
-    $ref: ..\..\components\responses\auth\500.yaml
+    $ref: ..\..\components\responses\500.yaml

@@ -7,7 +7,6 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Contacts app
 tags:
-  # теги, що ви будете використовувати
   - name: Contacts
     description: Operations about contacts.
   - name: Auth
@@ -17,10 +16,9 @@ servers:
   - url: https://example.com/api/v1
     #посилання на задеплоєний сайт
 paths:
-#   # тут будуть посилання на ендпоінти
   /auth/register:
     post:
-      $ref: "../swagger/paths/auth/register.yaml"
+      $ref: ../swagger/paths/auth/register.yaml
   /auth/login:
     post:
       $ref: ../swagger/paths/auth/login.yaml
@@ -30,12 +28,12 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh.yaml
-      /auth/send-reset-email:
+  /auth/send-reset-email:
     post:
-  #     $ref: ../swagger/paths/auth/send-reset-email/post.yaml
-  # /auth/reset-pwd:
-  #   post:
-  #     $ref: ../swagger/paths/auth/reset-pwd/post.yaml
+      $ref: ../swagger/paths/auth/send-reset-email.yaml
+  /auth/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-pwd.yaml
   /contacts:
     get:
       $ref: ../swagger/paths/contacts/get.yaml
@@ -53,11 +51,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-    cookieAuthUserId:
-      type: apiKey
-      in: cookie
-      name: sessionId
-    cookieAuthRefreshToken:
-      type: apiKey
-      in: cookie
-      name: refreshToken
+
