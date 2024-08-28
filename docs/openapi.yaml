@@ -19,9 +19,9 @@ servers:
 paths:
 #   # тут будуть посилання на ендпоінти
 #   /auth/register:
-#     post:
-#       $ref: ../swagger/paths/auth/register.yaml
-#   /auth/login:
+  #   post:
+  #     $ref: ../swagger/paths/auth/register.yaml
+  # /auth/login:
 #     post:
 #       $ref: ../swagger/paths/auth/login.yaml
 #   /auth/logout:
@@ -33,8 +33,8 @@ paths:
   /contacts:
     get:
       $ref: ../swagger/paths/contacts/get.yaml
-#     post:
-#       $ref: ../swagger/paths/contacts/post.yaml
+    post:
+      $ref: ../swagger/paths/contacts/post.yaml
   /contacts/{id}:
     get:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
