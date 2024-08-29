@@ -669,9 +669,7 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "email",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
@@ -703,14 +701,10 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "userId": {
-                    "description": "User's id",
-                    "type": "string",
-                    "example": "66cb53e74c3f8bdccb006070"
-                  },
                   "photo": {
-                    "description": "Link to contact's photo",
                     "type": "string",
+                    "format": "binary",
+                    "description": "Link to contact's photo",
                     "example": "https://res.cloudinary.com/dsf7ryper/image/upload/v1724619697/asjq8k68k9fqjp9fbiel.jpg"
                   }
                 }
@@ -889,14 +883,10 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "userId": {
-                    "description": "User's id",
-                    "type": "string",
-                    "example": "66cb53e74c3f8bdccb006070"
-                  },
                   "photo": {
-                    "description": "Link to contact's photo",
                     "type": "string",
+                    "format": "binary",
+                    "description": "Link to contact's photo",
                     "example": "https://res.cloudinary.com/dsf7ryper/image/upload/v1724619697/asjq8k68k9fqjp9fbiel.jpg"
                   }
                 }
@@ -1024,12 +1014,10 @@
       "contact": {
         "type": "object",
         "required": [
-          "_id",
           "name",
           "phoneNumber",
           "email",
-          "contactType",
-          "userId"
+          "contactType"
         ],
         "properties": {
           "_id": {
@@ -1075,6 +1063,16 @@
             "description": "Link to contact's photo",
             "type": "string",
             "example": "https://res.cloudinary.com/dsf7ryper/image/upload/v1724619697/asjq8k68k9fqjp9fbiel.jpg"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Contact last update"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Contact created at"
           }
         }
       }
