@@ -12,6 +12,7 @@ import { validateBody } from "../middlewares/validateBody.js";
 import { createContactSchema } from "../validation/createContactSchema.js";
 import { updateContactSchema } from "../validation/updateContactSchema.js";
 import { authenticate } from "../middlewares/authenticate.js";
+import { upload } from "../middlewares/upload.js";
 
 
 const contactsRouter = Router();
@@ -24,11 +25,20 @@ contactsRouter.get('/', ctrWrapper(getContactsController));
 
 contactsRouter.get('/:contactId', ctrWrapper(getContactByIdController));
 
-contactsRouter.post('/', validateBody(createContactSchema), ctrWrapper(createContactController));
+contactsRouter.post(
+    '/',
+    upload.single('photo'),
+    validateBody(createContactSchema),
+    ctrWrapper(createContactController)
+);
 
-contactsRouter.patch('/:contactId', validateBody(updateContactSchema), ctrWrapper(patchContactController));
+contactsRouter.patch(
+    '/:contactId',
+    upload.single('photo'),
+    validateBody(updateContactSchema),
+    ctrWrapper(patchContactController)
+);
 
 contactsRouter.delete('/:contactId', ctrWrapper(deleteContactByIdController));
-
 
 export default contactsRouter;
